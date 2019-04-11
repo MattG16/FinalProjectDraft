@@ -1,5 +1,10 @@
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -15,30 +20,30 @@ public class Server {
 		
 		Socket connected = ss.accept();
 		
-		OutputStream out = connected.getOutputStream();
-		
 		InputStream in = connected.getInputStream();
 		
-		Scanner input = new Scanner(in, "UTF-8");
+		InputStreamReader inReader = new InputStreamReader(in);
 		
-		PrintWriter output = new PrintWriter(new OutputStreamWriter(out));
+		BufferedReader reader = new BufferedReader(inReader);
 		
-	//	out.writeChars("Hello there client");
+		OutputStream out = connected.getOutputStream();
 		
-		boolean done = false;
+		OutputStreamWriter outWriter = new OutputStreamWriter(out);
 		
-		while(!done) {
-	
-				String line = input.nextLine();
-			//	System.out.println("Got here");
-				output.println(line);
-				output.flush();
-				if(line.trim().equals("BYE")) {
-					done = true;
-				}
+		BufferedWriter writer = new BufferedWriter(outWriter);
+		
+		String line = reader.readLine();
+		
+		System.out.println("Input from client: " + line);
+		
+		line = line.concat(" server checked");
+		
+		writer.write(line);
+		
+		writer.flush();
+		
 			
-			
-		}
+		
 		
 	}
 	
