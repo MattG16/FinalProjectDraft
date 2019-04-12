@@ -20,6 +20,8 @@ public class Server {
 		
 		Socket connected = ss.accept();
 		
+		System.out.println("Client connected");
+		
 		InputStream in = connected.getInputStream();
 		
 		InputStreamReader inReader = new InputStreamReader(in);
@@ -32,17 +34,21 @@ public class Server {
 		
 		BufferedWriter writer = new BufferedWriter(outWriter);
 		
-		String line = reader.readLine();
+		boolean done = false;
+		
+		String line = "";
+		
+		line = reader.readLine();
 		
 		System.out.println("Input from client: " + line);
 		
-		line = line.concat(" server checked");
+		line = line.concat(" server checked\n");
 		
 		writer.write(line);
 		
 		writer.flush();
 		
-			
+		connected.close();
 		
 		
 	}
