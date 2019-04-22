@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client {
 
@@ -25,7 +26,11 @@ public class Client {
 		
 		BufferedReader reader = new BufferedReader(inReader);
 		
-		String line = "message\n";
+		Scanner sc = new Scanner(System.in);
+		
+		String message = sc.nextLine();
+		
+		String line = message + "\n";
 		
 		writer.write(line);
 		writer.flush();
