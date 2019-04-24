@@ -17,10 +17,7 @@ import java.util.concurrent.Executors;
 
 public class Server {
 	
-	public static void main(String[] args) {
-		
-		
-		
+	public static void main(String[] args) throws Exception {
 	
 		try(ServerSocket ss = new ServerSocket(5112);) {
 			ExecutorService pool = Executors.newFixedThreadPool(20);
@@ -28,37 +25,6 @@ public class Server {
 				pool.execute(new ServerThread(ss.accept()));
 			}
 		} 
-		
-		
-		System.out.println("Client connected");
-		
-		InputStream in = connected.getInputStream();
-		
-		InputStreamReader inReader = new InputStreamReader(in);
-		
-		BufferedReader reader = new BufferedReader(inReader);
-		
-		OutputStream out = connected.getOutputStream();
-		
-		OutputStreamWriter outWriter = new OutputStreamWriter(out);
-		
-		BufferedWriter writer = new BufferedWriter(outWriter);
-		
-		boolean done = false;
-		
-		String line = "";
-		
-		line = reader.readLine();
-		
-		System.out.println("Input from client: " + line);
-		
-		line = line.concat(" server checked\n");
-		
-		writer.write(line);
-		
-		writer.flush();
-		
-		connected.close();
 		
 		
 	}
