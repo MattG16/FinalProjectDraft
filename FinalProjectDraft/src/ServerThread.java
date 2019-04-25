@@ -22,6 +22,7 @@ public class ServerThread implements Runnable {
 		System.out.println("Client connected");
 		
 		InputStream in;
+		
 		try {
 			in = connected.getInputStream();
 			
@@ -39,15 +40,28 @@ public class ServerThread implements Runnable {
 			
 			String line = "";
 			
-			line = reader.readLine();
+			writer.write("Hello this is a message from the server");
 			
-			System.out.println("Input from client: " + line);
+			while(!done) {
+				
+				System.out.println("Executed");
+				
+				if(reader.ready()) {
+					
+					line = reader.readLine();
+					
+					System.out.println("Input from client: " + line);
+					
+					writer.write(line);
+					
+					writer.flush();
+					
+				}
+				
+				
+				
+			}
 			
-			line = line.concat(" server checked\n");
-			
-			writer.write(line);
-			
-			writer.flush();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

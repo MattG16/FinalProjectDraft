@@ -43,8 +43,10 @@ public class Client {
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					writer.write(textField.getText());
-				} catch (IOException e1) {
+					String m = textField.getText();
+					writer.write(m + "\n");
+				//	textArea.append(m);
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -75,20 +77,17 @@ public class Client {
 		
 		BufferedReader reader = new BufferedReader(inReader);
 		
-		Scanner sc = new Scanner(System.in);
+//		Scanner sc = new Scanner(System.in);
 		
-		String message = sc.nextLine();
-		
-		String line = message + "\n";
-		
-		writer.write(line);
-		writer.flush();
-		
-		String output = reader.readLine();
-		
-		System.out.println("Message received from server: " + output);
-		
-		socket.close();
+		while(true) {
+			
+			String message = reader.readLine();
+			String line = message + "\n";
+			textArea.append(name + ": " + line);
+			writer.write(line);
+			writer.flush();
+			
+		}
 		
 		
 	}
@@ -101,6 +100,7 @@ public class Client {
 		client.frame.setSize(new Dimension(110, 80));
 		client.main.setSize(new Dimension(110, 80));
 		client.frame.setVisible(true);
+		client.program();
 	
 	}
 	
