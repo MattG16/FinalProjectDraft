@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -26,8 +27,9 @@ public class Client {
 	private JPanel main;
 	private JTextField textField;
 	private JTextArea textArea;
-	private BufferedWriter writer;
+	private PrintWriter writer;
 	private String name;
+	private Scanner reader;
 	
 	public Client() {
 		
@@ -44,7 +46,7 @@ public class Client {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String m = textField.getText();
-					writer.write(m + "\n");
+					writer.println(m);
 				//	textArea.append(m);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -69,23 +71,20 @@ public class Client {
 		
 		OutputStreamWriter outWriter = new OutputStreamWriter(out);
 		
-		writer = new BufferedWriter(outWriter);
+		writer = new PrintWriter(socket.getOutputStream(), true);
 		
 		InputStream in = socket.getInputStream();
 		
 		InputStreamReader inReader = new InputStreamReader(in);
 		
-		BufferedReader reader = new BufferedReader(inReader);
+		reader = new Scanner(socket.getInputStream());
 		
 //		Scanner sc = new Scanner(System.in);
 		
-		while(true) {
+		while(reader.hasNextLine()) {
 			
-			String message = reader.readLine();
-			String line = message + "\n";
-			textArea.append(name + ": " + line);
-			writer.write(line);
-			writer.flush();
+			String message = reader.nextLine();
+			textArea.append(name + ": " + message + "\n");
 			
 		}
 		

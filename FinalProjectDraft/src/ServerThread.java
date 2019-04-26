@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ServerThread implements Runnable {
 
@@ -17,8 +19,7 @@ public class ServerThread implements Runnable {
 		
 	@Override
 	public void run() {
-
-
+		
 		System.out.println("Client connected");
 		
 		InputStream in;
@@ -28,35 +29,35 @@ public class ServerThread implements Runnable {
 			
 			InputStreamReader inReader = new InputStreamReader(in);
 			
-			BufferedReader reader = new BufferedReader(inReader);
+			Scanner reader = new Scanner(connected.getInputStream());
 			
 			OutputStream out = connected.getOutputStream();
 			
 			OutputStreamWriter outWriter = new OutputStreamWriter(out);
 			
-			BufferedWriter writer = new BufferedWriter(outWriter);
+			PrintWriter writer = new PrintWriter(connected.getOutputStream(), true);
 			
 			boolean done = false;
 			
 			String line = "";
-			
-			writer.write("Hello this is a message from the server");
-			
+		
 			while(!done) {
 				
-				System.out.println("Executed");
+			//	System.out.println("Executed");
 				
-				if(reader.ready()) {
+			//	if(reader.ready()) {
 					
-					line = reader.readLine();
+				//	System.out.println("Execute");
+					
+					line = reader.nextLine();
 					
 					System.out.println("Input from client: " + line);
 					
-					writer.write(line);
+					writer.println(line);
 					
 					writer.flush();
 					
-				}
+			//	}
 				
 				
 				
