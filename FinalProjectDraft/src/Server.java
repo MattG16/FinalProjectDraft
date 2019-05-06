@@ -21,6 +21,7 @@ import java.util.concurrent.Executors;
 
 public class Server {
 	
+	
 	public static Set<PrintWriter> w = new HashSet<>();
 	
 	public static void main(String[] args) throws Exception {
@@ -67,6 +68,8 @@ private static class ServerThread implements Runnable {
 				
 				String line = "";
 			
+				String name = reader.nextLine();
+	
 				w.add(writer);
 				
 				while(!done) {
@@ -82,7 +85,7 @@ private static class ServerThread implements Runnable {
 						System.out.println("Input from client: " + line);
 						
 						for(PrintWriter wr : w) {
-							wr.println(line);
+							wr.println(name + ": " + line);
 						}
 						
 						writer.flush();
