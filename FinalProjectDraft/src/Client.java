@@ -41,12 +41,15 @@ public class Client {
 		main.add(new JScrollPane(textArea), BorderLayout.CENTER);
 	
 		textArea.setEditable(false);
+		textField.setEditable(false);
 		
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String m = textField.getText();
-					writer.println(m);
+					if(!m.isEmpty()) {
+						writer.println(m);
+					}
 				//	textArea.append(m);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -55,9 +58,8 @@ public class Client {
 				textField.setText("");
 			}
 		});
-		
 
-		name = JOptionPane.showInputDialog(frame, "What is your name", "Input Name", JOptionPane.PLAIN_MESSAGE);
+		
 		main.setVisible(true);
 		frame.add(main);
 		
@@ -65,7 +67,7 @@ public class Client {
 	
 	public void program() throws IOException {
 		
-		Socket socket = new Socket("localhost", 5112);
+		Socket socket = new Socket("10.70.20.9", 5112);
 		
 		OutputStream out = socket.getOutputStream();
 		
@@ -81,10 +83,16 @@ public class Client {
 		
 //		Scanner sc = new Scanner(System.in);
 		
+		name = JOptionPane.showInputDialog(frame, "What is your name", "Input Name", JOptionPane.PLAIN_MESSAGE);
+		
+		writer.println(name);
+		
+		textField.setEditable(true);
+		
 		while(reader.hasNextLine()) {
 			
 			String message = reader.nextLine();
-			textArea.append(name + ": " + message + "\n");
+			textArea.append(message + "\n");
 			
 		}
 		
@@ -96,8 +104,8 @@ public class Client {
 		
 		Client client = new Client();
 		client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		client.frame.setSize(new Dimension(110, 80));
-		client.main.setSize(new Dimension(110, 80));
+		client.frame.setSize(new Dimension(1400, 500));
+		client.main.setSize(new Dimension(1400, 500));
 		client.frame.setVisible(true);
 		client.program();
 	
