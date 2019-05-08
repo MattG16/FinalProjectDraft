@@ -26,7 +26,7 @@ public class Server {
 	
 	public static void main(String[] args) throws Exception {
 		
-		try(ServerSocket ss = new ServerSocket(5112);) {
+		try(ServerSocket ss = new ServerSocket(5112);) {				
 			ExecutorService pool = Executors.newFixedThreadPool(20);
 			while(true) {
 				pool.execute(new ServerThread(ss.accept()));
