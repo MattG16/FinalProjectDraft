@@ -47,7 +47,7 @@ public class Client {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String m = textField.getText();
-					if(!m.isEmpty()) {
+					if(!m.trim().isEmpty()) {
 						writer.println(m);
 					}
 				//	textArea.append(m);
@@ -67,7 +67,7 @@ public class Client {
 	
 	public void program() throws IOException {
 		
-		Socket socket = new Socket("10.70.20.9", 5112);
+		Socket socket = new Socket("10.0.0.242", 5112);
 		
 		OutputStream out = socket.getOutputStream();
 		
