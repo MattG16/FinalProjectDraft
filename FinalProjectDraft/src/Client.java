@@ -47,7 +47,9 @@ public class Client {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String m = textField.getText();
-					writer.println(m);
+					if(!m.isEmpty()) {
+						writer.println(m);
+					}
 				//	textArea.append(m);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
