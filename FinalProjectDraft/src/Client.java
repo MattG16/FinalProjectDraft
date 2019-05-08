@@ -65,7 +65,7 @@ public class Client {
 	
 	public void program() throws IOException {
 		
-		Socket socket = new Socket("localhost", 5112);
+		Socket socket = new Socket("10.70.20.9", 5112);
 		
 		OutputStream out = socket.getOutputStream();
 		
