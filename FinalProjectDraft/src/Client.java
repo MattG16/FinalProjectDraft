@@ -67,7 +67,9 @@ public class Client {
 	
 	public void program() throws IOException {
 		
-		Socket socket = new Socket("10.0.0.242", 5112);
+		String ip = JOptionPane.showInputDialog(frame, "Enter IP", "What is the IP of the server you want to chat on", JOptionPane.PLAIN_MESSAGE);
+		
+		Socket socket = new Socket(ip , 5112);
 		
 		OutputStream out = socket.getOutputStream();
 		
