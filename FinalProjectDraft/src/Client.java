@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +25,8 @@ import javax.swing.JTextField;
 
 public class Client {
 	
+	private JButton button;
+	private JFileChooser fileChooser;
 	private JFrame frame;
 	private JPanel main;
 	private JTextField textField;
