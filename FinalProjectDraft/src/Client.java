@@ -1,9 +1,11 @@
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileSystemView;
 
 public class Client {
 	
@@ -40,9 +43,12 @@ public class Client {
 		frame = new JFrame("Messenger Client");
 		textField = new JTextField(100);
 		textArea = new JTextArea(20, 100);
+		button = new JButton("Attach File");
+		fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		main = new JPanel();
 		main.add(textField, BorderLayout.SOUTH);
 		main.add(new JScrollPane(textArea), BorderLayout.CENTER);
+		main.add(button, BorderLayout.WEST);
 	
 		textArea.setEditable(false);
 		textField.setEditable(false);
@@ -62,7 +68,26 @@ public class Client {
 				textField.setText("");
 			}
 		});
-
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					fileChooser.setDialogTitle("Choose a file to send: ");
+					fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+					
+					int returnValue = fileChooser.showOpenDialog(new JFrame());
+					
+					if(returnValue == fileChooser.APPROVE_OPTION) {
+						File selectedFile = fileChooser.getSelectedFile();
+			            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+					}
+					
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		
 		main.setVisible(true);
 		frame.add(main);
