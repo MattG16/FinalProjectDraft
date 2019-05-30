@@ -36,6 +36,8 @@ public class Client {
 	private JTextArea textArea;
 	private PrintWriter writer;
 	private String name;
+	private File selectedFile;
+	private boolean file = false;
 	private Scanner reader;
 	
 	public Client() {
@@ -79,8 +81,9 @@ public class Client {
 					int returnValue = fileChooser.showOpenDialog(new JFrame());
 					
 					if(returnValue == fileChooser.APPROVE_OPTION) {
-						File selectedFile = fileChooser.getSelectedFile();
+						selectedFile = fileChooser.getSelectedFile();
 			            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+			            file = true;
 					}
 					
 				} catch (Exception e2) {
