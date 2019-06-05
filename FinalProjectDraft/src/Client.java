@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -71,27 +73,6 @@ public class Client {
 			}
 		});
 		
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					
-					fileChooser.setDialogTitle("Choose a file to send: ");
-					fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-					
-					int returnValue = fileChooser.showOpenDialog(new JFrame());
-					
-					if(returnValue == fileChooser.APPROVE_OPTION) {
-						selectedFile = fileChooser.getSelectedFile();
-			            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-			            file = true;
-					}
-					
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
-		});
-		
 		main.setVisible(true);
 		frame.add(main);
 		
@@ -122,6 +103,44 @@ public class Client {
 		writer.println(name);
 		
 		textField.setEditable(true);
+		
+	/*	 int filesize = 6022386;
+		
+		 byte[] fileByte  = new byte[filesize];
+
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					FileOutputStream fos;
+					FileInputStream fin;
+					
+					fileChooser.setDialogTitle("Choose a file to send: ");
+					fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+					
+					int returnValue = fileChooser.showOpenDialog(new JFrame());
+					
+					if(returnValue == fileChooser.APPROVE_OPTION) {
+						selectedFile = fileChooser.getSelectedFile();
+			            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+			            file = true;
+			            fos = new FileOutputStream(selectedFile);
+			            fin = new FileInputStream(selectedFile);
+			            
+			            int count;
+			            while ((count = in.read(fileByte)) > 0) {
+			                out.write(fileByte, 0, count);
+			            }
+			            
+					} 
+					
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
+		
+		*/
 		
 		while(reader.hasNextLine()) {
 			
