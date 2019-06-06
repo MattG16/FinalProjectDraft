@@ -104,7 +104,11 @@ public class Client {
 		
 		textField.setEditable(true);
 		
-	/*	 int filesize = 6022386;
+		// Commented Out section for file attachment code
+		
+		/*
+		
+		 int filesize = 6022386;
 		
 		 byte[] fileByte  = new byte[filesize];
 
@@ -139,6 +143,7 @@ public class Client {
 				}
 			}
 		});
+		
 		
 		*/
 		
